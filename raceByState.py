@@ -1,7 +1,5 @@
 from requests import get
 from bs4 import BeautifulSoup
-import plotly.plotly as py
-import plotly.figure_factory as ff
 import csv
 
 ###############METHODS##################
@@ -42,6 +40,7 @@ def scrapeData():
 page = get("https://www.cdc.gov/asthma/brfss/2014/tableL4.htm")
 stuff = BeautifulSoup(page.content, "lxml")
 data = scrapeData()
+printAllItems(data)
 
 #Export to CSV file
 # with open("test.csv", "w") as output:
