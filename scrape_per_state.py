@@ -29,21 +29,29 @@ def replaceUselessStuff(rows):
     return data
 
 #does the scraping and filters extra data
-def scrapeData():
+def scrapeData(content):
     #Find strong tags and table rows in the table
-    TableRows = stuff.find("div", id="contentArea").find("table").findAll("tr") #rawData
+    TableRows = content.find("div", id="contentArea").find("table").findAll("tr") #rawData
     TableData = replaceUselessStuff(TableRows)                                  #preprocessedData
     return TableData
 
 ###############MAIN PROGRAM#################
 #get the website and the HTML in lxml format
-page = get("https://www.cdc.gov/asthma/brfss/2014/tableL4.htm")
-stuff = BeautifulSoup(page.content, "lxml")
-data = scrapeData()
+race_page = get("https://www.cdc.gov/asthma/brfss/2014/tableL4.htm")
+income_page = get("https://www.cdc.gov/asthma/brfss/2014/tablel7.htm")
+race_content = BeautifulSoup(page.content, "lxml")
+income_content = BeautifulSoup(page2.content, "lxml")
+race_data = scrapeData(race_content)
+income_data = scrapeData(income_content)
 # printAllItems(data)
 
 #Export to CSV file
-with open("test.csv", "w") as output:
+with open("raceByState.csv", "w") as output:
     writer = csv.writer(output, lineterminator='\n')
     writer.writerow(["State","Race","Size","Percent"])
-    writer.writerows(data)
+    writer.writerows(race_data)
+
+with open("incomeByState.csv", "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerow(["State","Income","Size","Percent"])
+    writer.writerows(income_data)
