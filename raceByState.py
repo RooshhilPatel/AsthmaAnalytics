@@ -40,10 +40,10 @@ def scrapeData():
 page = get("https://www.cdc.gov/asthma/brfss/2014/tableL4.htm")
 stuff = BeautifulSoup(page.content, "lxml")
 data = scrapeData()
-printAllItems(data)
+# printAllItems(data)
 
 #Export to CSV file
-# with open("test.csv", "w") as output:
-#     writer = csv.writer(output, lineterminator='\n')
-#     writer.writerow(["State","Race","Size","Percent"])
-#     writer.writerows(data)
+with open("test.csv", "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerow(["State","Race","Size","Percent"])
+    writer.writerows(data)
