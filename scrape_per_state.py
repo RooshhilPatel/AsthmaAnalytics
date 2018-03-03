@@ -11,7 +11,7 @@ def printAllItems(givenList):
     return
 
 #split data to keep only state information (state rows)
-def splitData(data):
+def filterStates(data):
     stateData = []
     for d in data:
         if d and len(d[0]) == 2:
@@ -28,26 +28,30 @@ def replaceUselessStuff(rows):
             data.append(cols[:4])                        #only first 4 columns
     for d in data:                                       #drop 3rd column (size) because we only want percent
         del d[2]
-    data = splitData(data)
+    data = filterStates(data)
     return data
 
 #converts tags(<tr>) to list of list and removes extra columns and data
 #special replace method because different format
 def replaceUselessSexStuff(rows):
     data = []
+    data2 = []
     for row in rows:
         cols = row.find_all('td')
         cols = [ele.text.strip() for ele in cols if ele] #get rid of empty values
         if cols:
             data.append(cols[:8])                        #up to the female percent column
-    for d in data:                                       #delete extra columns
+    data = filterStates(data)                            #filter non states
+    for d in data:                                       #delete extra columns and change format
         del d[6]
         del d[5]
         del d[4]
         del d[3]
         del d[1]
-    data = splitData(data)
-    return data
+        data2.append([d[0],"male",d[1]])
+        data2.append([d[0],"female",d[2]])
+    del data
+    return data2
 
 #does the scraping and filters extra data
 def scrapeData(content):
@@ -97,5 +101,5 @@ with open("ageByState.csv", "w") as output:
     writer.writerows(age_data)
 with open("sexByState.csv", "w") as output:
     writer = csv.writer(output, lineterminator='\n')
-    writer.writerow(["State","Male Percent","Female Percent"])
+    writer.writerow(["State","Sex","Percent"])
     writer.writerows(sex_data)
