@@ -4,12 +4,12 @@ import csv
 
 
 ###############METHODS##################
-# prints all items from given list if item is not empty
-def print_all_items(given_list):
-    for item in given_list:
-        if item:
-            print(item)
-    return
+# write and export data to csv
+def export_to_csv(csv_name, variable, data):
+    with open(csv_name, "w") as output:
+        writer = csv.writer(output, lineterminator='\n')
+        writer.writerow(["State", variable, "Percent"])
+        writer.writerows(data)
 
 
 # split data to keep only state information (state rows)
@@ -91,22 +91,9 @@ race_data = scrape_data(race_content)
 income_data = scrape_data(income_content)
 age_data = scrape_data(age_content)
 sex_data = scrape_sex_data(sex_content)
-# printAllItems(sex_data)
 
 # Export to respective CSV files
-with open("raceByState.csv", "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    writer.writerow(["State", "Race", "Percent"])
-    writer.writerows(race_data)
-with open("incomeByState.csv", "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    writer.writerow(["State", "Income", "Percent"])
-    writer.writerows(income_data)
-with open("ageByState.csv", "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    writer.writerow(["State", "Age", "Percent"])
-    writer.writerows(age_data)
-with open("sexByState.csv", "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    writer.writerow(["State", "Sex", "Percent"])
-    writer.writerows(sex_data)
+export_to_csv("raceByState.csv", "Race", race_data)
+export_to_csv("incomeByState.csv", "Income", income_data)
+export_to_csv("ageByState.csv", "Age", age_data)
+export_to_csv("sexByState.csv", "Sex", sex_data)
