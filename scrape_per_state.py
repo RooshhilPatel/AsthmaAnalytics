@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 
 
-###############METHODS##################
+# ##############METHODS################# #
 # write and export data to csv
 def export_to_csv(csv_name, variable, data):
     with open(csv_name, "w") as output:
@@ -75,7 +75,7 @@ def scrape_sex_data(content):
     return table_data
 
 
-###############MAIN PROGRAM#################
+# ##############MAIN PROGRAM################ #
 # get the website and the HTML in lxml format
 race_page = get("https://www.cdc.gov/asthma/brfss/2014/tableL4.htm")
 income_page = get("https://www.cdc.gov/asthma/brfss/2014/tablel7.htm")
