@@ -83,10 +83,10 @@ display_plot("On Age", "Age Brackets", a[0:6])
 
 # Race Plot
 build_scatter_plot(p3, 4, r[0:4])
-build_regression_plot(p3, 4, 3)
+# build_regression_plot(p3, 4, 2)
 display_plot("On Race", "Race Brackets", r[0:4])
 
 # Sex Plot
 build_scatter_plot(p4, 2, s[0:2])
-build_regression_plot(p4, 2, 2)
+# build_regression_plot(p4, 2, 1)
 display_plot("On Sex", "Sex Brackets", s[0:2])
