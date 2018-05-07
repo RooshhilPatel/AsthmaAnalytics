@@ -54,14 +54,14 @@ def build_regression_plot(percents, num_categories, degrees):
 # Display currently built plot
 def display_plot(title, x_label, categories):
 	# Labeling and showing the plot
-	plt.title("Polynomial Regression\n{0}".format(title))          # set title
+	plt.title("{0}".format(title))          # set title
 	plt.xlabel("{0}".format(x_label))                              # set x label
 	plt.ylabel("Asthma Prevalence (percent)")                      # set y label
 	labels = categories                                            # label array
 	plt.xticks(np.arange(len(categories)))                         # set ticks to replace
 	plt.axes().set_xticklabels(labels)                             # replace x-axis with our labels
 	plt.legend()                                                   # invoke legend on labels
-	plt.savefig("Regression {0}.png".format(title))                # save plot
+	plt.savefig("{0}.png".format(title))                # save plot
 	plt.show()                                                     # display plot
 
 
@@ -74,19 +74,19 @@ s, p4 = read_CSV('sexByState.csv', 'Sex')
 # Income Plot
 build_scatter_plot(p1, 5, i[0:5])
 build_regression_plot(p1, 5, 3)
-display_plot("On Income", "Income Brackets", i[0:5])
+display_plot("Polynomial Regression On Income", "Income Brackets", i[0:5])
 
 # Age Plot
 build_scatter_plot(p2, 6, a[0:6])
 build_regression_plot(p2, 6, 3)
-display_plot("On Age", "Age Brackets", a[0:6])
+display_plot("Polynomial Regression On Age", "Age Brackets", a[0:6])
 
 # Race Plot
 build_scatter_plot(p3, 4, r[0:4])
 # build_regression_plot(p3, 4, 2)
-display_plot("On Race", "Race Brackets", r[0:4])
+display_plot("Plot Of Race", "Race Brackets", r[0:4])
 
 # Sex Plot
 build_scatter_plot(p4, 2, s[0:2])
 # build_regression_plot(p4, 2, 1)
-display_plot("On Sex", "Sex Brackets", s[0:2])
+display_plot("Plot Of Gender", "Sex Brackets", s[0:2])
